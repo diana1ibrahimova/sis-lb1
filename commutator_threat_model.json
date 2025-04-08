@@ -1,0 +1,104 @@
+{
+  "summary": {
+    "title": "Загрози ІБ для комутатора",
+    "owner": "Користувач",
+    "description": "Модель загроз для комутатора з налаштуваннями швидкості, дуплексу та IP-адресації",
+    "id": "Комутатор-001",
+    "version": "1.0",
+    "date": "2025-04-08"
+  },
+  "detail": {
+    "diagrams": [
+      {
+        "title": "DFD1 - Комутатор",
+        "diagramType": "DFD",
+        "processes": [
+          {
+            "id": "p1",
+            "name": "Комутатор",
+            "outOfScope": false
+          }
+        ],
+        "dataStores": [
+          {
+            "id": "ds1",
+            "name": "Файл конфігурації",
+            "outOfScope": false
+          },
+          {
+            "id": "ds2",
+            "name": "CAM-таблиця",
+            "outOfScope": false
+          },
+          {
+            "id": "ds3",
+            "name": "ARP-таблиця",
+            "outOfScope": false
+          }
+        ],
+        "externalElements": [
+          {
+            "id": "ex1",
+            "name": "Адміністратор",
+            "outOfScope": false
+          },
+          {
+            "id": "ex2",
+            "name": "Сервер керування",
+            "outOfScope": false
+          },
+          {
+            "id": "ex3",
+            "name": "Користувацькі пристрої",
+            "outOfScope": false
+          }
+        ],
+        "flows": [
+          {
+            "id": "f1",
+            "source": "ex1",
+            "target": "p1",
+            "name": "SSH/Web доступ",
+            "protocol": "SSH/HTTPS"
+          },
+          {
+            "id": "f2",
+            "source": "p1",
+            "target": "ds1",
+            "name": "Запис/читання конфігурації",
+            "protocol": "internal"
+          },
+          {
+            "id": "f3",
+            "source": "p1",
+            "target": "ds2",
+            "name": "Оновлення CAM",
+            "protocol": "internal"
+          },
+          {
+            "id": "f4",
+            "source": "p1",
+            "target": "ds3",
+            "name": "Оновлення ARP",
+            "protocol": "internal"
+          },
+          {
+            "id": "f5",
+            "source": "p1",
+            "target": "ex2",
+            "name": "Зв'язок з сервером керування",
+            "protocol": "SNMP/HTTPS"
+          },
+          {
+            "id": "f6",
+            "source": "ex3",
+            "target": "p1",
+            "name": "Мережевий трафік",
+            "protocol": "Ethernet/IP"
+          }
+        ],
+        "trustZones": []
+      }
+    ]
+  }
+}
